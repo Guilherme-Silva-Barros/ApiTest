@@ -154,8 +154,11 @@
 
                     </div>
 
-                    <h4 th:text="${post.title}">
-                        Título da publicação
+                    <h4>
+                        <a th:href="@{/posts/{id}(id=${post.id})}"
+                           th:text="${post.title}">
+                            Título da publicação
+                        </a>
                     </h4>
 
                     <p class="post-content"
@@ -164,7 +167,9 @@
                     </p>
 
                     <div class="post-footer">
-                        <span>Publicação</span>
+                        <a th:href="@{/posts/{id}(id=${post.id})}" class="comments-link">
+                            Ver comentários →
+                        </a>
                         <span th:text="'ID: ' + ${post.id}">ID: 1</span>
                     </div>
 

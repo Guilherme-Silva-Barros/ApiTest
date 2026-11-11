@@ -2,10 +2,12 @@ package com.ApiTeste.apiTest.view;
 
 
 import com.ApiTeste.apiTest.dto.DTO;
+import com.ApiTeste.apiTest.exceptions.PostNotFoundException;
 import com.ApiTeste.apiTest.service.ApiService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -38,5 +40,15 @@ public class ViewController {
         model.addAttribute("tipo", tipo);
         model.addAttribute("valor", valor);
         return "posts";
+    }
+    @GetMapping("/{id}")
+    public String detail(@PathVariable Long id, Model model) {
+        try {
+            model.addAttribute("post", apiService.listById(id));
+            model.addAttribute("comments", apiService.findComentyById(id));
+        } catch (PostNotFoundException ex) {
+            model.addAttribute("erro", ex.getMessage());
+        }
+        return "post-detail";
     }
 }

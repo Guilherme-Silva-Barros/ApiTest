@@ -1,5 +1,6 @@
 package com.ApiTeste.apiTest.service;
 
+import com.ApiTeste.apiTest.dto.NewDTO;
 import com.ApiTeste.apiTest.exceptions.PostNotFoundException;
 import com.ApiTeste.apiTest.dto.DTO;
 import org.springframework.core.ParameterizedTypeReference;
@@ -42,6 +43,14 @@ public class ApiService {
                         .build())
                 .retrieve()
                 .body(new ParameterizedTypeReference<List<DTO>>() {});
+    }
+    //listar comentários de um post por id
+    public List<NewDTO>findComentyById(Long postId){
+        return restClient.get()
+                .uri("/posts/{id}/comments", postId)
+                .retrieve()
+                .body(new ParameterizedTypeReference<List<NewDTO>>() {
+                });
     }
 
 }

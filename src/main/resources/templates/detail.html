@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title th:text="${post != null} ? ${post.title} + ' | PostsHub' : 'Publicação | PostsHub'">
+        Publicação | PostsHub
+    </title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- CABEÇALHO -->
+    <header class="header">
+
+        <div class="brand">
+            <div class="brand-icon">P</div>
+
+            <div>
+                <h1>Posts<span>Hub</span></h1>
+                <p>Explorador de publicações</p>
+            </div>
+        </div>
+
+        <a th:href="@{/}" class="back-link">← Voltar</a>
+
+    </header>
+
+    <main>
+
+        <!-- ERRO: POST NÃO ENCONTRADO -->
+        <section class="results-section" th:if="${erro != null}">
+
+            <div class="empty-state">
+
+                <div class="empty-icon">⌕</div>
+
+                <h3>Publicação não encontrada</h3>
+
+                <p th:text="${erro}">Mensagem de erro.</p>
+
+                <a th:href="@{/}" class="back-button">
+                    Ver todas as publicações
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- POST + COMENTÁRIOS -->
+        <th:block th:if="${erro == null}">
+
+            <section class="results-section">
+
+                <article class="post-card post-detail">
+
+                    <div class="post-card-header">
+
+                        <span class="post-id"
+                              th:text="'POST #' + ${post.id}">
+                            POST #1
+                        </span>
+
+                        <span class="user-id"
+                              th:text="'Usuário ' + ${post.userId}">
+                            Usuário 1
+                        </span>
+
+                    </div>
+
+                    <h4 th:text="${post.title}">Título da publicação</h4>
+
+                    <p class="post-content" th:text="${post.body}">
+                        Conteúdo da publicação.
+                    </p>
+
+                </article>
+
+            </section>
+
+
+            <section class="comments-section">
+
+                <div class="results-heading">
+
+                    <div>
+                        <span class="section-label">COMENTÁRIOS</span>
+                        <h3>O que estão dizendo</h3>
+                    </div>
+
+                    <span class="result-count"
+                          th:text="${#lists.size(comments)} + ' comentários'">
+                        0 comentários
+                    </span>
+
+                </div>
+
+                <div class="comments-list"
+                     th:if="${!#lists.isEmpty(comments)}">
+
+                    <article class="comment-card" th:each="c : ${comments}">
+
+                        <div class="comment-avatar"
+                             th:text="${#strings.toUpperCase(#strings.substring(c.email, 0, 1))}">
+                            A
+                        </div>
+
+                        <div class="comment-body">
+
+                            <div class="comment-meta">
+                                <strong th:text="${c.name}">Nome do comentário</strong>
+                                <span th:text="${c.email}">email@exemplo.com</span>
+                            </div>
+
+                            <p th:text="${c.body}">Texto do comentário.</p>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+                <p class="comments-empty"
+                   th:if="${#lists.isEmpty(comments)}">
+                    Esta publicação ainda não tem comentários.
+                </p>
+
+            </section>
+
+        </th:block>
+
+    </main>
+
+    <footer class="footer">
+
+        <p>PostsHub · Desenvolvido com Java e Spring Boot</p>
+
+        <span>Consumo de API REST</span>
+
+    </footer>
+
+</div>
+
+</body>
+</html>

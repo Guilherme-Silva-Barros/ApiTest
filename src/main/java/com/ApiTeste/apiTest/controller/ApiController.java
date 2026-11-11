@@ -1,6 +1,7 @@
 package com.ApiTeste.apiTest.controller;
 
 import com.ApiTeste.apiTest.dto.DTO;
+import com.ApiTeste.apiTest.dto.NewDTO;
 import com.ApiTeste.apiTest.service.ApiService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,10 @@ public class ApiController {
             description = "responsável por mostrar o posts a partir do Id fornecido no corpo da requisição")
     public DTO listId(@PathVariable Long id){
         return apiService.listById(id);
+    }
+    @GetMapping("/{id}/comments")
+    public List<NewDTO>coments(@PathVariable Long id){
+        return apiService.findComentyById(id);
     }
 
 }

@@ -1,4 +1,4 @@
- {
+ *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -447,5 +447,172 @@ body {
         text-align: center;
     }
 
+    /* ===== DETALHE DO POST / COMENTÁRIOS ===== */
+
+    /* botão de voltar do cabeçalho (outline, não ocupa 100% no mobile) */
+    .back-link {
+        height: 38px;
+        display: inline-flex;
+        align-items: center;
+        padding: 0 16px;
+        border: 1px solid var(--border);
+        border-radius: 9px;
+        background: var(--surface);
+        color: var(--text-secondary);
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: 0.2s;
+    }
+
+    .back-link:hover {
+        background: #f1f5f9;
+        color: var(--text);
+    }
+
+    /* título do card vira link na listagem */
+    .post-card h4 a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .post-card h4 a:hover {
+        color: var(--primary);
+    }
+
+    /* "Ver comentários →" no rodapé do card */
+    .comments-link {
+        color: var(--primary);
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    .comments-link:hover {
+        color: var(--primary-dark);
+        text-decoration: underline;
+    }
+
+    /* card do post na página de detalhe: sem efeito de "levantar" */
+    .post-detail {
+        padding: 28px;
+    }
+
+    .post-detail:hover {
+        transform: none;
+        box-shadow: none;
+        border-color: var(--border);
+    }
+
+    .post-detail h4 {
+        font-size: 22px;
+        letter-spacing: -0.5px;
+    }
+
+    .post-detail .post-content {
+        font-size: 14px;
+    }
+
+    /* seção de comentários */
+    .comments-section {
+        padding: 0 0 40px;
+    }
+
+    .comments-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .comment-card {
+        display: flex;
+        gap: 15px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 18px 20px;
+        min-width: 0;
+    }
+
+    .comment-avatar {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: #eaf1ff;
+        color: var(--primary);
+        font-size: 15px;
+        font-weight: 800;
+    }
+
+    .comment-body {
+        min-width: 0;
+    }
+
+    .comment-meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 3px 10px;
+        margin-bottom: 8px;
+    }
+
+    .comment-meta strong {
+        font-size: 13px;
+        text-transform: capitalize;
+        overflow-wrap: anywhere;
+    }
+
+    .comment-meta span {
+        font-size: 11px;
+        color: #94a3b8;
+        overflow-wrap: anywhere;
+    }
+
+    .comment-body p {
+        color: var(--text-secondary);
+        font-size: 13px;
+        line-height: 1.8;
+        overflow-wrap: anywhere;
+    }
+
+    .comments-empty {
+        background: var(--surface);
+        border: 1px dashed #cbd5e1;
+        border-radius: 14px;
+        padding: 30px 20px;
+        text-align: center;
+        color: var(--text-secondary);
+        font-size: 13px;
+    }
+
+    @media (max-width: 550px) {
+
+        .post-detail {
+            padding: 18px;
+        }
+
+        .post-detail h4 {
+            font-size: 18px;
+        }
+
+        .comment-card {
+            padding: 14px;
+            gap: 12px;
+        }
+
+        .comment-avatar {
+            width: 34px;
+            height: 34px;
+            font-size: 13px;
+        }
+
+        .comments-section {
+            padding-bottom: 30px;
+        }
+
+    }
+
 }
-```
+
